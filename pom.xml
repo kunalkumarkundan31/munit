@@ -91,5 +91,12 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
+<distributionManagement>
+    	<repository>
+        	<id>MuleExchangeRepository</id>
+        	<name>MuleExchangeRepository</name>
+        	<url>https://maven.anypoint.mulesoft.com/api/v1/organizations/7b7f7c6d-fb9c-41fe-9a73-5eb790721add/maven</url>
+        	<layout>default</layout>
+        </repository>
+    </distributionManagement>
 </project>
