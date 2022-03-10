@@ -33,7 +33,7 @@ node {
     stage('Deploy cloudHub') {
     echo 'Munit Testing'
     def mvnHome = tool 'MVN_HOME'
-    def comm1 = mvnHome + '/bin' + '/mvn deploy -Dmule.version=4.3.0 -DmuleDeploy -Ddeployment=cloudhub -Danypoint.username=kunalkumarkundan007 -Danypoint.password=Dell@1234'
+    def comm1 = mvnHome + '/bin' + '/mvn deploy'
     echo comm1
     
    bat comm1
