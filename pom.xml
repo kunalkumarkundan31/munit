@@ -34,7 +34,7 @@
 							<classifier>mule-application</classifier>
 							<cloudHubDeployment>
 								
-								
+								<muleVersion>${app.runtime}</muleVersion>
 								<applicationName>CalcAppNew</applicationName>
 								<environment>Sandbox</environment>
 								<region>us-east-1</region>
