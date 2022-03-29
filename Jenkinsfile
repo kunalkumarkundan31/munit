@@ -16,7 +16,7 @@
 	Mule_Version = '4.3.0'
     region='us-west-2'
     timeout=2000000
-    gitUrl='https://github.com/kunalkumarkundan31/Calculator.git'
+    gitUrl='https://github.com/kunalkumarkundan31/CalculatorApp.git'
     mvnHome = tool 'MVN_HOME'
     deleteDir()
     echo "Mvn Directory " + mvnHome
