@@ -53,7 +53,7 @@
   {
       echo "Applying Policy start"
 	//  bat pyPath + 'python policy.py --u suraj_vishwakarma92 --p Accamulesoft@714687 --o 49b2f3b2-4cf4-44a7-b613-1212fb36b9b2 --e 0406b9bd-19cb-44fe-8488-cd2cc0de32ee --at sample-policy-cicd-test_v1 --pp policy_config.json'
-      bat pyPath + 'python policy.py --u kunalkumarkundan007 --p Dell@1234 --o 7b7f7c6d-fb9c-41fe-9a73-5eb790721add --e be057240-328d-49bc-bd67-fe03f012dd52 --at Sample-policy --pp policy_config.json'
+      bat pyPath + 'python policy.py --u kunalkumarkundan007 --p Dell@1234 --o 7b7f7c6d-fb9c-41fe-9a73-5eb790721add --e be057240-328d-49bc-bd67-fe03f012dd52 --at sample-policy --pp policy_config.json'
        
 	  echo "Applying Policy finish"
   }
