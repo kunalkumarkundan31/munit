@@ -8,6 +8,8 @@ print("Hello")
 # Defining main function
 def main():
     print("hey there")
+    with open('auto.txt', 'w') as f:
+    f.write('Create a new text file!')
   
   
 # Using the special variable 
