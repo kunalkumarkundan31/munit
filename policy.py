@@ -32,7 +32,6 @@ def fetchToken(username,password):
     except Exception as e:
         print("token generation failed! please check your credentials")
         # print(e)
-        raise Exception("Only integers are allowed")
         return 0
         
 
