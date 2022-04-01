@@ -9,7 +9,7 @@ print("Hello")
 def main():
     print("hey there")
     with open('auto.txt', 'w') as f:
-      f.write('Create a new text file!')
+      f.write('Auto discovery id is 123')
   
   
 # Using the special variable 
