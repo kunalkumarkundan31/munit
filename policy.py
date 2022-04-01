@@ -24,7 +24,7 @@ def fetchToken(username,password):
         "password": password
     }   
     try:
-        response = requests.post(tokenUrl, headers=headers, json=payload)
+        response = requests.post(tokenUrl, headers=headers, json=payload,verify=false)
         tokenResponse = json.loads(response.content) 
         token = tokenResponse['access_token']
         print("---------------token generated successfully---------------")
