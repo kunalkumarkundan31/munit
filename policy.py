@@ -40,7 +40,7 @@ def validatePolicy(organizationId,environmentId,apiId):
     authorization = "Bearer " + token
     headers = {"Content-Type": "application/json","Authorization":authorization}
     print("validating the policies for appId: ",apiId)
-    response = requests.get(policyUrl, headers=headers)
+    response = requests.get(policyUrl, headers=headers,verify= False)
     policyResponse = json.loads(response.content)
     policies = policyResponse['policies']
     if(len(policies)>0):
@@ -57,7 +57,7 @@ def fetchApiId(organizationId,environmentId,assetId):
     authorization = "Bearer " + token
     headers = {"Content-Type": "application/json","Authorization":authorization}
     print("fetching apiId for assetId: ",assetId)
-    response = requests.get(assetUrl, headers=headers)
+    response = requests.get(assetUrl, headers=headers,verify= False)
     assetsResponse = json.loads(response.content)
     assets = assetsResponse['assets']
     for asset in assets:
@@ -90,7 +90,7 @@ def applyPolicy(organizationId,environmentId,apiId,policyDetails):
             if policy_v['assetId'] == payload_v['assetId'] and policy_v['apply'] == True:
                 status =True
                 print("applying the policy: ",policy_v['assetId'])
-                response = requests.post(policyUrl, headers=headers, json=payload_v)
+                response = requests.post(policyUrl, headers=headers, json=payload_v,verify= False)
                         
     if(status):
         print("---------------policies applied successfully---------------") 
