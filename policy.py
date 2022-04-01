@@ -32,8 +32,9 @@ def fetchToken(username,password):
     except Exception as e:
         print("token generation failed! please check your credentials")
         # print(e)
+        raise e
         return 0
-        Throw e
+        
 
 def validatePolicy(organizationId,environmentId,apiId):
     policyUrl = "https://anypoint.mulesoft.com/apimanager/api/v1/organizations/" + \
