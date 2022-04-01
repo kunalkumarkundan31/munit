@@ -27,7 +27,7 @@ def fetchToken(username,password):
         response = requests.post(tokenUrl, headers=headers, json=payload, verify= False)
         tokenResponse = json.loads(response.content) 
         token = tokenResponse['access_token']
-        print("---------------token generated successfully---------------")
+        print("---------------token generated successfully--------------- ")
         return 1
     except Exception as e:
         print("token generation failed! please check your credentials")
