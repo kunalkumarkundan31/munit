@@ -3,6 +3,8 @@
 <mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd">
+	<global-property doc:name="Global Property" doc:id="0931f6a1-c71b-4db8-99a6-d92fb123d1dc" name="testenv" value="prod" />
+	
 	<flow name="calcappFlow" doc:id="c0c343fe-563b-443b-9f7f-7c6e9a1d9d76" >
 		<scheduler doc:name="Scheduler" doc:id="dbf9f831-a1d5-4719-a941-8ed9a369f4bf" >
 			<scheduling-strategy >
