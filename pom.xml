@@ -32,16 +32,23 @@
 				<extensions>true</extensions>
 				<configuration>
 							<classifier>mule-application</classifier>
-							<cloudHubDeployment>
+										<cloudHubDeployment>
 								
 								<muleVersion>${app.runtime}</muleVersion>
-								<applicationName>CalcAppNew</applicationName>
-								<environment>Sandbox</environment>
-								<region>us-east-1</region>
-								<workers>1</workers>
-								<workerType>Micro</workerType>
+								<username>${username}</username>
+								<password>${password}</password>
+								<businessGroup>${businessGroup}</businessGroup>
+								<applicationName>${appName}</applicationName>
+								<environment>${environment}</environment>
+								<region>${region}</region>
+								<workers>${workers}</workers>
+								<workerType>${workerType}</workerType>
+								<deploymentTimeout>${timeout}</deploymentTimeout>
 								
-								
+								<properties>
+									<env>${env}</env>
+									<autoDiscoveryId>${autoDiscoveryId}</autoDiscoveryId>
+								</properties>
 							</cloudHubDeployment>
 					
 				
