@@ -71,6 +71,8 @@ def fetchApiId(organizationId,environmentId,assetId):
             status = True
     if(status):
         print("apiId fetched successfully:- ",apiId)
+        with open('tempid.txt', 'w') as f:
+        f.write(apiId)
         return 1
     else:
         print("fetch apiId failed! please check your assetId")
