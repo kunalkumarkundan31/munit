@@ -20,6 +20,7 @@ node {
 	def autoDiscoveryId=''
 	def policyConfigFile='Jenkins/policy/policy_config.json'
 	def jenkinsGlobalCredDev='anypointCredentials'
+	def policyFile='policy-file'
 
   stage('Initialize') 
   {
@@ -66,14 +67,17 @@ node {
       try 
       {
       echo "Applying Policy start"
-      withCredentials([usernamePassword(credentialsId: "${jenkinsGlobalCredDev}", passwordVariable: 'PASS', usernameVariable: 'USER')])
+      configFileProvider([configFile(fileId: "${policyFile}", variable: 'policyScript')]) 
+ {
+withCredentials([usernamePassword(credentialsId: "${jenkinsGlobalCredDev}", passwordVariable: 'PASS', usernameVariable: 'USER')])
          	{
-	   def pyPath1= 'python Jenkins/policy/policy.py --u ' + USER + ' --p ' + PASS + ' --o '+ orgId + ' --e '+ envId + ' --at ' + apiName + ' --pp ' + policyConfigFile
+	   def pyPath1= 'python '+ policyScript+ ' --u ' + USER + ' --p ' + PASS + ' --o '+ orgId + ' --e '+ envId + ' --at ' + apiName + ' --pp ' + policyConfigFile
        def pyPath2= pyPath + pyPath1
        bat pyPath2
        autoDiscoveryId = readFile(file: 'tempid.txt')
        echo autoDiscoveryId
 	}
+ }
       }
       catch (Exception e)
       {
@@ -97,7 +101,7 @@ node {
                              def deployComm = mvnHome + '/bin' + '/mvn deploy -DmuleDeploy -DskipTests -Ddeployment=cloudhub ' + ' -Dusername=' + USER + ' -Dpassword=' + PASS + ' -DbusinessGroup='+businessGroup+ ' -Denvironment=' + environment + ' -DworkerType=' + workerType + ' -Dworkers=' + workers + ' -Dregion='+ region + ' -DappName='+ appName + ' -Dtimeout=' +timeout + ' -Denv=' + environment + ' -Denv='+ envProp + ' -DautoDiscoveryId='+ autoDiscoveryId 
                               echo deployComm
                               
-                              bat deployComm
+                             // bat deployComm
 		                   }
    }
    
