@@ -20,6 +20,7 @@ node {
 	def autoDiscoveryId=''
 	def policyConfigFile='Jenkins/policy/policy_config.json'
 	def jenkinsGlobalCredDev='anypointCredentials'
+	def gitCredentials='git.credentials'
 	def policyFile='policy-file'
 
   stage('Initialize') 
@@ -40,7 +41,7 @@ node {
   stage('Checkout Source Code') 
   {
     echo 'Fetching the soure code'
-	git branch: 'DEV', url: gitUrl
+	git credentialsId: gitCredentials, branch: 'DEV', url: gitUrl
 	
   }
   
