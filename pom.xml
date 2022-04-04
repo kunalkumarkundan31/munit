@@ -33,7 +33,7 @@
 				<configuration>
 							<classifier>mule-application</classifier>
 										<cloudHubDeployment>
-								<appName>${appName}</appName>
+								<applicationName>${appName}</applicationName>
 								<muleVersion>${app.runtime}</muleVersion>
 								<username>${username}</username>
 								<password>${password}</password>
