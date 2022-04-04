@@ -1,6 +1,6 @@
 node {
 	    //Env specific variables
-	def appName= 'CalcJen'
+	def appName= 'CalcJen1'
 	def workerType='Small'
 	def workers='1'
 	def region='us-west-2'
