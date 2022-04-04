@@ -11,6 +11,6 @@
 				<fixed-frequency />
 			</scheduling-strategy>
 		</scheduler>
-		<logger level="INFO" doc:name="Logger" doc:id="32975fc1-81fc-4ac8-b31c-cb3f1fa9b118" message="${envvv}"/>
+		<logger level="INFO" doc:name="Logger" doc:id="32975fc1-81fc-4ac8-b31c-cb3f1fa9b118" message="this is scheduler"/>
 	</flow>
 </mule>
