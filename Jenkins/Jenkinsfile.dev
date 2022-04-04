@@ -18,7 +18,7 @@ node {
 	def mvnHome=''
 	def businessGroup=''
 	def autoDiscoveryId=''
-	def policyConfigFile='policy_config.json'
+	def policyConfigFile='Jenkins/policy/policy_config.json'
 	def jenkinsGlobalCredDev='anypointCredentials'
 
   stage('Initialize') 
@@ -68,7 +68,7 @@ node {
       echo "Applying Policy start"
       withCredentials([usernamePassword(credentialsId: "${jenkinsGlobalCredDev}", passwordVariable: 'PASS', usernameVariable: 'USER')])
          	{
-	   def pyPath1= 'python policy.py --u ' + USER + ' --p ' + PASS + ' --o '+ orgId + ' --e '+ envId + ' --at ' + apiName + ' --pp ' + policyConfigFile
+	   def pyPath1= 'python Jenkins/policy/policy.py --u ' + USER + ' --p ' + PASS + ' --o '+ orgId + ' --e '+ envId + ' --at ' + apiName + ' --pp ' + policyConfigFile
        def pyPath2= pyPath + pyPath1
        bat pyPath2
        autoDiscoveryId = readFile(file: 'tempid.txt')
