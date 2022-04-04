@@ -1,30 +1,39 @@
- node {
-    def Mule_Version = ""
-    def mavenSettingsFile='maven-mulesoft-settings'
-    def workerType=''
-	def workers=''
+node {
+	    //Env specific variables
+	def appName= 'CalcJen'
+	def workerType='Small'
+	def workers='1'
+	def region='us-west-2'
+	def envProp= 'dev'
+	def gitUrl='https://github.com/kunalkumarkundan31/CalculatorApp.git'
+	def environment ='Sandbox'
+	def orgId = '7b7f7c6d-fb9c-41fe-9a73-5eb790721add'
+	def envId='be057240-328d-49bc-bd67-fe03f012dd52'
+	def apiName='sample-policy'
+	//def apiName=''
+	
+	
+	// System variables
+	def timeout=2000000
 	def mvnHome=''
-	def region=''
-    def timeout='0'
-    def gitUrl=''
-    
+	def businessGroup=''
+	def autoDiscoveryId=''
+	def policyConfigFile='policy_config.json'
+	def jenkinsGlobalCredDev='anypointCredentials'
+
   stage('Initialize') 
   {
     echo 'Configure maven directory and other initialize variables'
-    workerType='Small'
-    workers='1'
-	Mule_Version = '4.3.0'
-    region='us-west-2'
-    timeout=2000000
-    gitUrl='https://github.com/kunalkumarkundan31/CalculatorApp.git'
+    
     mvnHome = tool 'MVN_HOME'
     deleteDir()
     echo "Mvn Directory " + mvnHome
-	echo "Worker Type " + workerType
-	echo "Number of Workers " + workers
-	echo "Mule runtime version " + Mule_Version
-	echo "Region selected " + region
-	echo "Tiemout value " + timeout
+    echo "Application Name " + appName
+    echo "Worker Type " + workerType
+    echo "Number of Workers " + workers
+    echo "Region selected " + region
+    echo "Env Property "  + envProp
+    echo "GIT URL "  + gitUrl
   }
   
   stage('Checkout Source Code') 
@@ -49,24 +58,46 @@
       bat munitComm
   }
   
-       stage('Apply Policy') 
-  {
+  if(apiName != '')
+    {
+  
+    stage('Apply Policy') 
+     {
+      try 
+      {
       echo "Applying Policy start"
-	 bat pyPath + 'python policy.py --u kunalkumarkundan007 --p Dell@1234 --o 7b7f7c6d-fb9c-41fe-9a73-5eb790721add --e be057240-328d-49bc-bd67-fe03f012dd52 --at sample-policy --pp policy_config.json'
-       
-	  echo "Applying Policy finish"
+      withCredentials([usernamePassword(credentialsId: "${jenkinsGlobalCredDev}", passwordVariable: 'PASS', usernameVariable: 'USER')])
+         	{
+	   def pyPath1= 'python policy.py --u ' + USER + ' --p ' + PASS + ' --o '+ orgId + ' --e '+ envId + ' --at ' + apiName + ' --pp ' + policyConfigFile
+       def pyPath2= pyPath + pyPath1
+       bat pyPath2
+       autoDiscoveryId = readFile(file: 'tempid.txt')
+       echo autoDiscoveryId
+	}
+      }
+      catch (Exception e)
+      {
+          echo "Auto Dsicovery ID IS not found or some other error occurred"
+           if(apiName != '' && autodiscoveryId == '')
+                {
+                     throw new Exception("Autodiscovery Id is missing, please check if apiName is present")
+                  }
+      }
   }
+    }
+
   stage('Deploy')
    {
     echo 'Deployment started'
-    def jenkinsGlobalCredDev='anypointCredentials'
+    
     withCredentials([
 		                    usernamePassword(credentialsId: "${jenkinsGlobalCredDev}", passwordVariable: 'PASS', usernameVariable: 'USER'),
 		                   ]) {
-		                        echo USER
-		                       echo PASS
-		                       def deployComm = mvnHome + '/bin' + '/mvn deploy -DmuleDeploy' + ' -Danypoint.username=' + USER + ' -Danypoint.password=' + PASS 
-                               bat deployComm
+		                     
+                             def deployComm = mvnHome + '/bin' + '/mvn deploy -DmuleDeploy -DskipTests -Ddeployment=cloudhub ' + ' -Dusername=' + USER + ' -Dpassword=' + PASS + ' -DbusinessGroup='+businessGroup+ ' -Denvironment=' + environment + ' -DworkerType=' + workerType + ' -Dworkers=' + workers + ' -Dregion='+ region + ' -DappName='+ appName + ' -Dtimeout=' +timeout + ' -Denv=' + environment + ' -Denv='+ envProp + ' -DautoDiscoveryId='+ autoDiscoveryId 
+                              echo deployComm
+                              
+                              bat deployComm
 		                   }
    }
    
