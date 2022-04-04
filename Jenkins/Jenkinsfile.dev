@@ -1,6 +1,6 @@
 node {
 	    //Env specific variables
-	def appName= 'CalcJen2'
+	def appName= 'CalcApp3'
 	def workerType='Small'
 	def workers='1'
 	def region='us-west-2'
@@ -101,7 +101,7 @@ withCredentials([usernamePassword(credentialsId: "${jenkinsGlobalCredDev}", pass
                              def deployComm = mvnHome + '/bin' + '/mvn deploy -DmuleDeploy -DskipTests -Ddeployment=cloudhub ' + ' -Dusername=' + USER + ' -Dpassword=' + PASS + ' -DbusinessGroup='+businessGroup+ ' -Denvironment=' + environment + ' -DworkerType=' + workerType + ' -Dworkers=' + workers + ' -Dregion='+ region + ' -DappName='+ appName + ' -Dtimeout=' +timeout + ' -Denv=' + environment + ' -Denv='+ envProp + ' -DautoDiscoveryId='+ autoDiscoveryId 
                               echo deployComm
                               
-                             // bat deployComm
+                             bat deployComm
 		                   }
    }
    
